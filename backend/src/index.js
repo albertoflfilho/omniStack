@@ -10,9 +10,7 @@ mongoose.connect(
   }
 );
 
-app.get('/', (req, res) => {
-  return res.send('Node Express here!');
-});
+app.use(require('./routes'));
 
 app.listen(3000, () => {
   console.log(' -> Server started on port 3000');
