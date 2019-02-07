@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
 
 import {
-  KeyboardAvoidView,
+  KeyboardAvoidingView,
   View,
   TextInput,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 
-// import styles from './styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Login extends Component {
   render() {
     return (
-      <KeyboardAvoidView behavior="padding" style={styles.container}>
-        <View style={styles.content} />
-      </KeyboardAvoidView>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <View style={styles.content}>
+          <Icon name="twitter" size={64} color="#4BB0EE" />
+
+          <TextInput
+            style={styles.input}
+            placeholder="username"
+            //value={}
+            returnKeyType="send"
+          />
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
