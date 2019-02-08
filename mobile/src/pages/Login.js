@@ -21,7 +21,7 @@ export default class Login extends Component {
     const username = await AsyncStorage.getItem('@AFLTwitter:username');
 
     if (username) {
-      this.props.navegation.navigate('Timelime');
+      this.props.navegation.navigate('App');
     }
   }
 
