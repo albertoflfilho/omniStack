@@ -3,14 +3,42 @@ import React, { Component } from 'react';
 import {
   KeyboardAvoidingView,
   View,
+  Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  AsyncStorage,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Login extends Component {
+  state = {
+    username: '',
+  };
+
+  async componentDidMount() {
+    const username = await AsyncStorage.getItem('@AFLTwitter:username');
+
+    if (username) {
+      this.props.navegation.navigate('Timelime');
+    }
+  }
+
+  handleLogin = async () => {
+    const { username } = this.state;
+
+    if (!username.length) return;
+
+    await AsyncStorage.setItem('@AFLTwitter', username);
+
+    this.props.navigation.navigate('Timeline');
+  };
+
+  handleInputChange = (username) => {
+    this.setState({ username });
+  };
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -20,9 +48,14 @@ export default class Login extends Component {
           <TextInput
             style={styles.input}
             placeholder="username"
-            //value={}
+            value={this.state.username}
+            onChangeText={this.handleInputChange}
+            onSubmitEditing={this.handleLogin}
             returnKeyType="send"
           />
+          <TouchableOpacity onPress={this.handleLogin} style={styles.button}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     );
