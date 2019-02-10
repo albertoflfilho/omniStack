@@ -1,12 +1,69 @@
 import React, { Component } from 'react';
+import api from '../services/api';
 
-import { View, StyleSheet } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  AsyncStorage,
+  StyleSheet,
+} from 'react-native';
 
-// import styles from './styles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class New extends Component {
+  static navigationOptions = {
+    header: null,
+  };
+
+  state = {
+    newTweet: '',
+  };
+
+  goBack = () => {
+    this.props.navigation.pop();
+  };
+
+  handleTweet = async () => {
+    const content = this.state.newTweet;
+    const author = await AsyncStorage.getItem('@AFLTwwiter:username');
+
+    await api.post('tweets', { author, content });
+
+    this.goBack();
+  };
+
+  handleInpuChange = (newTweet) => {
+    this.setState({ newTweet });
+  };
+
   render() {
-    return <View style={styles.container} />;
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
+          <TouchableOpacity onPress={this.goBack}>
+            <Icon name="close" size={24} color="#4BB0EE" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button} onPress={this.handleTweet}>
+            <Text style={styles.buttonText}>Tweetar</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TextInput
+          style={styles.input}
+          multiline
+          placeholder="What's up?"
+          placeholderTextColor="#999"
+          value={this.state.newTweet}
+          onChangeText={this.handleInputChange}
+          returnKeyType="send"
+          onSubmitEditing={this.handleTweet}
+        />
+      </SafeAreaView>
+    );
   }
 }
 

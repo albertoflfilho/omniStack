@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import api from '../services/api';
 
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Tweet extends Component {
+  handleLike = () => {
+    const { _id } = this.props.tweet;
+
+    api.post(`likes/${_id}`);
+  };
   render() {
     const { tweet } = this.props;
 
