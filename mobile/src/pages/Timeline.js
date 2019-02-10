@@ -14,10 +14,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Tweet from '../components/Tweet';
 
 export default class Timeline extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'Start',
     headerRight: (
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => navigation.navigate('New')}>
         <Icon
           style={{ marginRight: 10 }}
           name="add-circle-outline"
@@ -26,7 +26,7 @@ export default class Timeline extends Component {
         />
       </TouchableOpacity>
     ),
-  };
+  });
 
   state = {
     tweets: [],
