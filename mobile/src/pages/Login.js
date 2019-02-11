@@ -18,7 +18,7 @@ export default class Login extends Component {
   };
 
   async componentDidMount() {
-    const username = await AsyncStorage.getItem('@AFLTwitter:username');
+    const username = await AsyncStorage.getItem('@TwitterAFL:username');
 
     if (username) {
       this.props.navegation.navigate('App');
@@ -30,7 +30,7 @@ export default class Login extends Component {
 
     if (!username.length) return;
 
-    await AsyncStorage.setItem('@AFLTwitter', username);
+    await AsyncStorage.setItem('@TwitterAFL:username', username);
 
     this.props.navigation.navigate('Timeline');
   };

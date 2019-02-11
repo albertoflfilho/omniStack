@@ -28,21 +28,21 @@ export default class New extends Component {
 
   handleTweet = async () => {
     const content = this.state.newTweet;
-    const author = await AsyncStorage.getItem('@AFLTwwiter:username');
+    const author = await AsyncStorage.getItem('@TwitterAFL:username');
 
     await api.post('tweets', { author, content });
 
     this.goBack();
   };
 
-  handleInpuChange = (newTweet) => {
+  handleInputChange = (newTweet) => {
     this.setState({ newTweet });
   };
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.container}>
+        <View style={styles.header}>
           <TouchableOpacity onPress={this.goBack}>
             <Icon name="close" size={24} color="#4BB0EE" />
           </TouchableOpacity>
@@ -55,7 +55,7 @@ export default class New extends Component {
         <TextInput
           style={styles.input}
           multiline
-          placeholder="What's up?"
+          placeholder="What's up"
           placeholderTextColor="#999"
           value={this.state.newTweet}
           onChangeText={this.handleInputChange}

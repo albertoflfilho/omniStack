@@ -11,6 +11,7 @@ export default class Tweet extends Component {
 
     api.post(`likes/${_id}`);
   };
+
   render() {
     const { tweet } = this.props;
 
