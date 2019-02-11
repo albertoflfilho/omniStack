@@ -19,7 +19,7 @@ export default class Tweet extends Component {
       <View style={styles.container}>
         <Text style={styles.author}>{tweet.author}</Text>
         <Text style={styles.content}>{tweet.content}</Text>
-        <TouchableOpacity onPress={() => {}} style={styles.likeButton}>
+        <TouchableOpacity onPress={this.handleLike} style={styles.likeButton}>
           <Icon name="ios-heart-empty" size={20} color="#999" />
           <Text style={styles.likeText}>{tweet.likes}</Text>
         </TouchableOpacity>
